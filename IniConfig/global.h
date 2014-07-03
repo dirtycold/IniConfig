@@ -1,4 +1,4 @@
-#ifndef TOOLS_H
+﻿#ifndef TOOLS_H
 #define TOOLS_H
 
 #include <vector>
@@ -122,7 +122,28 @@ static inline std::string toString(T t){
 #ifdef _MSC_VER
 // MSDN reference
 static const unsigned long nan[2]={0xffffffff, 0x7fffffff};
-static const double NAN = *(double *)nan;
+static const double NaN = *(double *)nan;
+#else
+static const double NaN = NAN;
+#endif
+
+#ifdef _MSC_VER
+static inline int round(double x)
+{
+    double xx = int(x);
+    double r = x - xx;
+    if (std::abs(r) < 0.5)
+    {
+        return int(xx);
+    }
+    else
+    {
+        return x>0?int(xx+1):int(xx-1);
+    }
+}
+
+#else
+#define round round
 #endif
 
 // variables

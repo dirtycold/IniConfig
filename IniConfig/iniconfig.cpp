@@ -1,6 +1,7 @@
-#include "iniconfig.h"
+﻿#include "iniconfig.h"
 #include <fstream>
 
+using namespace rp;
 
 IniConfig::IniConfig(const std::string &filepath)
     :m_filepath(filepath)
@@ -58,7 +59,7 @@ void IniConfig::clear()
 std::string IniConfig::value(const std::string &key)
 {
     if (m_map.find(key) != m_map.end())
-        return m_map.at(key);
+        return m_map[key];
     else
         return "";
 }
@@ -67,7 +68,7 @@ double IniConfig::doubleValue(const std::string &key)
 {
     std::string s = value(key);
     if (s.empty())
-        return NAN;
+        return rp::NaN;
     else
         return rp::toDouble(s);
 }
@@ -75,10 +76,10 @@ double IniConfig::doubleValue(const std::string &key)
 int IniConfig::intValue(const std::string &key)
 {
     double r = doubleValue(key);
-    if (r != NAN)
-        return int(round(r));
+    if (r != rp::NaN)
+        return rp::round(r);
     else
-        return int(NAN);
+        return int(rp::NaN);
 }
 
 rp::dataseries IniConfig::dataSeries(const std::string &key)

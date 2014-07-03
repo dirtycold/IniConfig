@@ -1,11 +1,11 @@
-#include "../IniConfig/iniconfig.h"
+﻿#include "../IniConfig/iniconfig.h"
 
 int main(int argc, char* argv[])
 {
     UNUSED(argc);
     UNUSED(argv);
 
-    IniConfig ini ("config.cfg");
+    rp::IniConfig ini ("config.cfg");
     std::vector<double> data = ini.dataSeries("data");
     for (unsigned int i = 0; i < data.size(); ++i)
     {
