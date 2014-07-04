@@ -68,17 +68,17 @@ std::string IniConfig::value(const std::string &key)
 double IniConfig::doubleValue(const std::string &key)
 {
     std::string s = value(key);
-    if (s.empty())
-        return RP::NaN;
-    else
+    if (!s.empty())
         return RP::toDouble(s);
+    else
+        return RP::NaN;
 }
 
 int IniConfig::intValue(const std::string &key)
 {
-    double r = doubleValue(key);
-    if (r != RP::NaN)
-        return RP::round(r);
+    std::string s = value(key);
+    if (!s.empty())
+        return toInt(s);
     else
         return int(RP::NaN);
 }
