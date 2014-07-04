@@ -16,13 +16,13 @@
 #define INI __attribute__((visibility("default")))
 #endif
 
-namespace rp {
+namespace RP {
 //namespace begin
 
 class IniConfig;
-typedef std::vector<std::string> stringlist;
-typedef std::map<std::string, std::string> stringmap;
-typedef std::vector<double> dataseries;
+typedef std::vector<std::string> StringList;
+typedef std::map<std::string, std::string> StringMap;
+typedef std::vector<double> DataSeries;
 
 // trimming
 
@@ -63,9 +63,9 @@ static inline std::string trim(const std::string &s) {
 
 // splitting
 
-static inline stringlist split(const std::string &s, char d)
+static inline StringList split(const std::string &s, char d)
 {
-    stringlist list;
+    StringList list;
     std::istringstream stream(s);
     std::string line;
 
@@ -104,7 +104,7 @@ static inline std::vector<double> toDataSeries(const std::string &s)
     {
         s2 = s2.erase(0,1);
         s2 = s2.erase(s.size() -2,s.size()-1);
-        stringlist l = split(s2,',');
+        StringList l = split(s2,',');
         for (unsigned int i = 0; i < l.size(); ++i)
         {
             v.push_back(toDouble(l.at(i)));
@@ -154,7 +154,7 @@ static inline int round(double x)
 
 } // end of namespace
 
-class rp::IniConfig
+class RP::IniConfig
 {
 
 public:
@@ -206,7 +206,7 @@ public:
      * @param key 指定的键值
      * @return 键值的数据序列
      */
-    INI rp::dataseries dataSeries(const std::string &key);
+    INI RP::DataSeries dataSeries(const std::string &key);
 
     /**
      * @brief 设定配置键值的内容
@@ -231,7 +231,7 @@ public:
      * @param key 指定的键值
      * @param v 数据序列
      */
-    INI void setDataSeries(const std::string &key, const rp::dataseries &v);
+    INI void setDataSeries(const std::string &key, const DataSeries &v);
     /**
      * @brief 导出配置关系表到字符缓冲
      * @param stream 指定的字符缓冲
@@ -243,7 +243,7 @@ public:
      * @brief 导出现有配置关系表
      * @return 现有配置关系表的 const reference
      */
-    INI const rp::stringmap &mapRef();
+    INI const RP::StringMap &mapRef();
 
 protected:
     /**
@@ -259,7 +259,7 @@ protected:
 
 protected:
     std::string m_filepath;
-    rp::stringmap m_map;
+    RP::StringMap m_map;
 };
 
 #endif // INICONFIG_H

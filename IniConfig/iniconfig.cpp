@@ -1,7 +1,7 @@
 ﻿#include "iniconfig.h"
 #include <fstream>
 
-using namespace rp;
+using namespace RP;
 
 IniConfig::IniConfig(const std::string &filepath)
     :m_filepath(filepath)
@@ -17,18 +17,18 @@ IniConfig::~IniConfig()
 void IniConfig::map(std::stringstream &stream)
 {
     std::string line;
-    rp::stringlist list;
+    RP::StringList list;
     char c;
     while (std::getline(stream,line))
     {
         //discard nested comments
-        list = rp::split(line,'/');
+        list = RP::split(line,'/');
         if (!list.empty())
         {
             //get comments removed
             line = list.at(0);
             //read key and value
-            list = rp::split(line,'=');
+            list = RP::split(line,'=');
             if (!list.empty())
             {
                 c = list.front().at(0);
@@ -68,24 +68,24 @@ double IniConfig::doubleValue(const std::string &key)
 {
     std::string s = value(key);
     if (s.empty())
-        return rp::NaN;
+        return RP::NaN;
     else
-        return rp::toDouble(s);
+        return RP::toDouble(s);
 }
 
 int IniConfig::intValue(const std::string &key)
 {
     double r = doubleValue(key);
-    if (r != rp::NaN)
-        return rp::round(r);
+    if (r != RP::NaN)
+        return RP::round(r);
     else
-        return int(rp::NaN);
+        return int(RP::NaN);
 }
 
-rp::dataseries IniConfig::dataSeries(const std::string &key)
+DataSeries IniConfig::dataSeries(const std::string &key)
 {
     std::string line = value(key);
-    return rp::toDataSeries(line);
+    return RP::toDataSeries(line);
 }
 
 void IniConfig::set(const std::string &key, const std::string &value)
@@ -98,15 +98,15 @@ void IniConfig::set(const std::string &key, const std::string &value)
 
 void IniConfig::set(const std::string &key, const double &value)
 {
-    set (key,rp::toString(value));
+    set (key,RP::toString(value));
 }
 
 void IniConfig::set(const std::string &key, const int &value)
 {
-    set (key,rp::toString(value));
+    set (key,RP::toString(value));
 }
 
-void IniConfig::setDataSeries(const std::string &key, const rp::dataseries &v)
+void IniConfig::setDataSeries(const std::string &key, const RP::DataSeries &v)
 {
     std::stringstream stream;
     if (v.empty())
@@ -125,7 +125,7 @@ void IniConfig::setDataSeries(const std::string &key, const rp::dataseries &v)
 
 void IniConfig::dump(std::stringstream &stream, bool verbose)
 {
-    rp::stringmap::const_iterator it;
+    RP::StringMap::const_iterator it;
     std::string key;
     std::string value;
     if (verbose)
@@ -145,7 +145,7 @@ void IniConfig::dump(std::stringstream &stream, bool verbose)
     }
 }
 
-const rp::stringmap &IniConfig::mapRef()
+const StringMap &IniConfig::mapRef()
 {
     return m_map;
 }
@@ -178,5 +178,3 @@ void IniConfig::write()
         file.close();
     }
 }
-
-

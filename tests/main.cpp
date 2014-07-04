@@ -5,8 +5,8 @@ int main(int argc, char* argv[])
     UNUSED(argc);
     UNUSED(argv);
 
-    rp::IniConfig ini ("config.cfg");
-    std::vector<double> data = ini.dataSeries("data");
+    RP::IniConfig ini ("config.cfg");
+    RP::DataSeries data = ini.dataSeries("data");
     for (unsigned int i = 0; i < data.size(); ++i)
     {
         std::cout << data.at (i) << std::endl;
@@ -20,12 +20,11 @@ int main(int argc, char* argv[])
 
     std::string s1="            Hello               ";
     std::cout << s1 << std::endl;
-    std::string s2 = rp::trim(s1);
+    std::string s2 = RP::trim(s1);
     std::cout << s1 << std::endl;
     std::cout << s2 << std::endl;
-    std::vector<double> data1;
+    RP::DataSeries data1;
     data1.push_back(12.34);
 
     ini.setDataSeries("d1",data1);
 }
-
