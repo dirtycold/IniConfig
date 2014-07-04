@@ -161,8 +161,9 @@ public:
     /**
      * @brief 构造函数
      * @param filepath 指定配置文件的路径和文件名
+     * @param readonly 指定是否为只读模式，避免文件写入操作
      */
-    INI IniConfig (const std::string &filepath);
+    INI IniConfig (const std::string &filepath, bool readonly = false);
 
     INI ~IniConfig ();
     /**
@@ -258,6 +259,7 @@ protected:
     void write();
 
 protected:
+    bool m_readonly;
     std::string m_filepath;
     RP::StringMap m_map;
 };

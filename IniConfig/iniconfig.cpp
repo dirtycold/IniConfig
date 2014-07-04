@@ -3,15 +3,16 @@
 
 using namespace RP;
 
-IniConfig::IniConfig(const std::string &filepath)
-    :m_filepath(filepath)
+IniConfig::IniConfig(const std::string &filepath, bool readonly)
+    :m_filepath(filepath),m_readonly(readonly)
 {
     read();
 }
 
 IniConfig::~IniConfig()
 {
-    write();
+    if(!m_readonly)
+        write();
 }
 
 void IniConfig::map(std::stringstream &stream)
