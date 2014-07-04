@@ -233,7 +233,7 @@ public:
      * @param key 指定的键值
      * @param v 数据序列
      */
-    INI void set(const std::string &key, const DataSeries &v);
+    INI void set(const std::string &key, const DataSeries &data);
     /**
      * @brief 导出配置关系表到字符缓冲
      * @param stream 指定的字符缓冲

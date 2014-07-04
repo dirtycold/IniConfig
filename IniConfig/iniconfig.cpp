@@ -107,19 +107,19 @@ void IniConfig::set(const std::string &key, const int &value)
     set (key,RP::toString(value));
 }
 
-void IniConfig::set(const std::string &key, const RP::DataSeries &v)
+void IniConfig::set(const std::string &key, const RP::DataSeries &data)
 {
     std::stringstream stream;
-    if (v.empty())
+    if (data.empty())
     {
         return;
     }
     stream << "{";
-    for (unsigned int i=0; i < v.size()-1; ++i)
+    for (unsigned int i=0; i < data.size()-1; ++i)
     {
-        stream << v.at(i) << ",";
+        stream << data.at(i) << ",";
     }
-    stream << v.at(v.size()-1);
+    stream << data.at(data.size()-1);
     stream << "}";
     set(key,stream.str());
 }
