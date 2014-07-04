@@ -88,10 +88,9 @@ static inline double toDouble(const std::string &s)
     return d;
 }
 
-static inline int toInt(const std::string &s, unsigned int base = 10)
+static inline int toInt(const std::string &s)
 {
-    int i = strtol(s.c_str(),NULL,base);
-    return i;
+    return int(toDouble(s));
 }
 
 static inline std::vector<double> toDataSeries(const std::string &s)
