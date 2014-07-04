@@ -106,7 +106,7 @@ void IniConfig::set(const std::string &key, const int &value)
     set (key,RP::toString(value));
 }
 
-void IniConfig::setDataSeries(const std::string &key, const RP::DataSeries &v)
+void IniConfig::set(const std::string &key, const RP::DataSeries &v)
 {
     std::stringstream stream;
     if (v.empty())

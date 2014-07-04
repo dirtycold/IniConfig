@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
     ini.set ("value2",88.88);
     ini.set ("token","token_string");
     std::cout << std::endl;
-    ini.setDataSeries ("new",data);
+    ini.set ("new",data);
 
     std::string s1="            Hello               ";
     std::cout << s1 << std::endl;
@@ -26,5 +26,5 @@ int main(int argc, char* argv[])
     RP::DataSeries data1;
     data1.push_back(12.34);
 
-    ini.setDataSeries("d1",data1);
+    ini.set ("d1",data1);
 }
