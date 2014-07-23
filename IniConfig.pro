@@ -2,4 +2,5 @@ TEMPLATE = subdirs
 
 CONFIG += ordered
 
-SUBDIRS += IniConfig tests
+SUBDIRS += IniConfig tests \
+    IniConfigFlatter
