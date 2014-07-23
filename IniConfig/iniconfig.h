@@ -71,9 +71,10 @@ public:
     /**
      * @brief 取得特定键值的配置内容，并转换为整型
      * @param key 指定的键值
+     * @param base 整数转换用的基值
      * @return 键值的内容
      */
-    INI int intValue (const std::string &key);
+    INI int intValue (const std::string &key, unsigned int base = 10);
     /**
      * @brief 取得特定键值的配置内容，以花括号识别等号分割，并转换为数据序列
      * @param key 指定的键值
@@ -97,6 +98,7 @@ public:
      * @brief 设定配置键值的内容
      * @param key 指定的键值
      * @param value 键值的内容,整型
+     * @warning 暂时不支持 10进制外的整数写入
      */
     INI void set (const std::string &key, const int &value);
     /**

@@ -207,11 +207,11 @@ double IniConfig::doubleValue(const std::string &key)
         return RP::NaN;
 }
 
-int IniConfig::intValue(const std::string &key)
+int IniConfig::intValue(const std::string &key, unsigned int base)
 {
     std::string s = value(key);
     if (!s.empty())
-        return toInt(s);
+        return toInt(s,base);
     else
         return int(RP::NaN);
 }
