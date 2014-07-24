@@ -201,10 +201,10 @@ std::string IniConfig::value(const std::string &key)
 double IniConfig::doubleValue(const std::string &key)
 {
     std::string s = value(key);
-    if (!s.empty())
-        return RP::toDouble(s);
-    else
+    if (s.empty())
         return RP::NaN;
+    else
+        return RP::toDouble(s);
 }
 
 int IniConfig::intValue(const std::string &key, unsigned int base)
