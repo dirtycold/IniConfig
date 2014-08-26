@@ -120,7 +120,17 @@ public:
      */
     INI const RP::StringMap &mapRef();
 
-protected:
+    /*
+     * 注意：这两个方法本是构造函数和析构函数的一部分。
+     * 现已声明为 public, 以便于使用此类的程序可以在任何时候进行读取和保存。
+     * 请牢记，多个实例同时修改同一个配置文件将会得到不可预计的结果。这样会导致
+     * 他们内部的配置关系表会存在差异，这也是一开始这两个方法被声明为 protected
+     * 的原因。
+     * 简单来说：写入方法不是线程安全的。
+     *
+     * 使用前请三思。
+     */
+
     /**
      * @brief 读取配置文件的内容,默认初始化动作
 	 * @note 自动调用 map()
@@ -129,12 +139,13 @@ protected:
     /**
      * @brief 写入配置文件的内容,默认结束时动作
 	 * @note  自动调用 dump()
+     * @warning 不要多实例同时写入
      */
     void write();
 
 protected:
-    bool m_readonly;
     std::string m_filepath;
+    bool m_readonly;
     RP::StringMap m_map;
 };
 
