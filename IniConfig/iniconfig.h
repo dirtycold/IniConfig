@@ -135,13 +135,13 @@ public:
      * @brief 读取配置文件的内容,默认初始化动作
 	 * @note 自动调用 map()
      */
-    void read();
+    INI void read();
     /**
      * @brief 写入配置文件的内容,默认结束时动作
 	 * @note  自动调用 dump()
      * @warning 不要多实例同时写入
      */
-    void write();
+    INI void write();
 
 protected:
     std::string m_filepath;
