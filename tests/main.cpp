@@ -2,8 +2,8 @@
 
 int main(int argc, char* argv[])
 {
-    UNUSED(argc);
-    UNUSED(argv);
+    // UNUSED(argc);
+    // UNUSED(argv);
 
     RP::IniConfig ini ("config.cfg");
     RP::DataSeries data = ini.dataSeries("data");
@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
 
     std::string s1="            Hello               ";
     std::cout << s1 << std::endl;
-    std::string s2 = RP::trim(s1);
+    std::string s2 = /*RP::trim*/(s1);
     std::cout << s1 << std::endl;
     std::cout << s2 << std::endl;
     RP::DataSeries data1;
