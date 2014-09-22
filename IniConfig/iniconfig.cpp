@@ -78,8 +78,8 @@ static inline std::vector<double> toDataSeries(const std::string &s)
     std::vector<double> v;
     if (s.empty())
         return v;
-    std::string s2 = s;
-    s2 = trim(s2);
+    std::string s2 = trim(s);
+    //s2 = trim(s2);
     if (s2.at(0) == '{' && s.at(s.size()-1) == '}')
     {
         s2 = s2.erase(0,1);
@@ -128,10 +128,6 @@ static inline int round(double x)
 #define round round
 #endif
 
-// variables
-//unused variable
-#define UNUSED(x) (void)x
-
 }
 
 using namespace RP;
@@ -166,7 +162,7 @@ void IniConfig::map(std::stringstream &stream)
             if (!list.empty())
             {
                 c = list.front().at(0);
-                if (c == '[' || c == '#')
+                if (c == '[' || c == '#' || c == '/')
                 {
                     continue;
                 }
@@ -201,10 +197,11 @@ std::string IniConfig::value(const std::string &key)
 double IniConfig::doubleValue(const std::string &key)
 {
     std::string s = value(key);
-    if (s.empty())
-        return RP::NaN;
-    else
+    if (!s.empty())
         return RP::toDouble(s);
+    else
+        return RP::NaN;
+
 }
 
 int IniConfig::intValue(const std::string &key, unsigned int base)
@@ -216,6 +213,14 @@ int IniConfig::intValue(const std::string &key, unsigned int base)
         return int(RP::NaN);
 }
 
+bool IniConfig::boolValue(const std::string &key)
+{
+	int value = intValue(key);
+	if (value == 0)
+		return false;
+	else
+		return true;
+}
 DataSeries IniConfig::dataSeries(const std::string &key)
 {
     std::string line = value(key);
@@ -238,6 +243,11 @@ void IniConfig::set(const std::string &key, const double &value)
 void IniConfig::set(const std::string &key, const int &value)
 {
     set (key,RP::toString(value));
+}
+
+void IniConfig::set(const std::string &key, const bool &value)
+{
+	set (key,RP::toString(value==false?0:1));
 }
 
 void IniConfig::set(const std::string &key, const RP::DataSeries &data)

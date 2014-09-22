@@ -75,6 +75,12 @@ public:
      * @return 键值的内容
      */
     INI int intValue (const std::string &key, unsigned int base = 10);
+	/**
+     * @brief 取得特定键值的配置内容，并转换为整型
+     * @param key 指定的键值
+     * @return 键值的内容转换为bool变量，内部存储使用int。
+     */
+	INI bool boolValue(const std::string &key);
     /**
      * @brief 取得特定键值的配置内容，以花括号识别等号分割，并转换为数据序列
      * @param key 指定的键值
@@ -101,6 +107,12 @@ public:
      * @warning 暂时不支持 10进制外的整数写入
      */
     INI void set (const std::string &key, const int &value);
+	/**
+     * @brief 设定配置键值的内容
+     * @param key 指定的键值
+     * @param value 键值的内容,bool类型
+     */
+	INI void set (const std::string &key, const bool &value);
     /**
      * @brief 设定配置键值的数据序列
      * @param key 指定的键值
@@ -126,7 +138,9 @@ public:
      * 请牢记，多个实例同时修改同一个配置文件将会得到不可预计的结果。这样会导致
      * 他们内部的配置关系表会存在差异，这也是一开始这两个方法被声明为 protected
      * 的原因。
+     *
      * 简单来说：写入方法不是线程安全的。
+     * 而且同线程内也是不安全的...
      *
      * 使用前请三思。
      */
