@@ -59,6 +59,7 @@ public:
      * @brief 清除现有配置关系表
      */
     INI void clear ();
+	
     /**
      * @brief 取得特定键值的配置内容
      * @param key 指定的键值
@@ -94,7 +95,6 @@ public:
      * @return 键值的数据序列
      */
     INI RP::DataSeries dataSeries(const std::string &key) const;
-
 
     /**
      * @brief 设定配置键值的内容
