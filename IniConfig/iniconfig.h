@@ -85,12 +85,12 @@ public:
 	/**
      * @brief 取得特定键值的配置内容，并转换为整型
      * @param key 指定的键值
-     * @return 键值的内容转换为bool变量，内部存储使用int。
+     * @return 键值的内容转换为bool变量，内部存储使用整型
      */
     INI bool boolValue(const std::string &key) const;
 
     /**
-     * @brief 取得特定键值的配置内容，以花括号识别等号分割，并转换为数据序列
+     * @brief 取得特定键值的配置内容，以花括号识别逗号分割，并转换为数据序列
      * @param key 指定的键值
      * @return 键值的数据序列
      */
@@ -106,22 +106,22 @@ public:
     /**
      * @brief 设定配置键值的内容
      * @param key 指定的键值
-     * @param value 键值的内容,双精度浮点
+     * @param value 键值的内容，双精度浮点
      */
     INI void set (const std::string &key, const double &value);
 
     /**
      * @brief 设定配置键值的内容
      * @param key 指定的键值
-     * @param value 键值的内容,整型
-     * @warning 暂时不支持 10进制外的整数写入
+     * @param value 键值的内容，整型
+     * @warning 暂时不支持 10进制 之外基值的整数写入
      */
     INI void set (const std::string &key, const int &value);
 
 	/**
      * @brief 设定配置键值的内容
      * @param key 指定的键值
-     * @param value 键值的内容,bool类型
+     * @param value 键值的内容，bool类型
      */
 	INI void set (const std::string &key, const bool &value);
 
@@ -136,7 +136,7 @@ public:
      * @brief 导出配置关系表到字符缓冲
      * @param stream 指定的字符缓冲
      * @param verbose 是否输出为调试格式
-     * @note 调试格式仅用来调试,无法用于配置的保存
+     * @note 调试格式仅用来调试，无法用于配置的保存
      */
     INI void dump(std::stringstream &stream, bool verbose = false) const;
 
@@ -167,7 +167,7 @@ public:
 
     /**
      * @brief 写入配置文件的内容,默认结束时动作
-	 * @note  自动调用 dump()
+     * @note 自动调用 dump()
      * @warning 不要多实例同时写入
      */
     INI void write();
