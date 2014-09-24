@@ -132,16 +132,27 @@ static inline int round(double x)
 
 using namespace RP;
 
-IniConfig::IniConfig(const std::string &filepath, bool readonly)
-    :m_filepath(filepath),m_readonly(readonly)
+class RP::IniConfigPrivate
 {
+public:
+    std::string m_filepath;
+    bool m_readonly;
+    RP::StringMap m_map;
+};
+
+IniConfig::IniConfig(const std::string &filepath, bool readonly)
+{
+    p = new IniConfigPrivate();
+    p->m_filepath = filepath;
+    p->m_readonly = readonly;
     read();
 }
 
 IniConfig::~IniConfig()
 {
-    if(!m_readonly)
+    if(!p->m_readonly)
         write();
+    delete p;
 }
 
 void IniConfig::map(std::stringstream &stream)
@@ -168,7 +179,7 @@ void IniConfig::map(std::stringstream &stream)
                 }
                 else if (list.size() == 2)
                 {
-                    m_map.insert(std::make_pair(list.front(),list.back()));
+                    p->m_map.insert(std::make_pair(list.front(),list.back()));
                 }
             }
         }
@@ -183,28 +194,27 @@ void IniConfig::remap(std::stringstream &stream)
 
 void IniConfig::clear()
 {
-    m_map.clear();
+    p->m_map.clear();
 }
 
-std::string IniConfig::value(const std::string &key)
+std::string IniConfig::value(const std::string &key) const
 {
-    if (m_map.find(key) != m_map.end())
-        return m_map[key];
+    if (p->m_map.find(key) != p->m_map.end())
+        return p->m_map[key];
     else
         return "";
 }
 
-double IniConfig::doubleValue(const std::string &key)
+double IniConfig::doubleValue(const std::string &key) const
 {
     std::string s = value(key);
     if (!s.empty())
         return RP::toDouble(s);
     else
         return RP::NaN;
-
 }
 
-int IniConfig::intValue(const std::string &key, unsigned int base)
+int IniConfig::intValue(const std::string &key, unsigned int base) const
 {
     std::string s = value(key);
     if (!s.empty())
@@ -213,7 +223,7 @@ int IniConfig::intValue(const std::string &key, unsigned int base)
         return int(RP::NaN);
 }
 
-bool IniConfig::boolValue(const std::string &key)
+bool IniConfig::boolValue(const std::string &key) const
 {
 	int value = intValue(key);
 	if (value == 0)
@@ -221,7 +231,7 @@ bool IniConfig::boolValue(const std::string &key)
 	else
 		return true;
 }
-DataSeries IniConfig::dataSeries(const std::string &key)
+DataSeries IniConfig::dataSeries(const std::string &key) const
 {
     std::string line = value(key);
     return RP::toDataSeries(line);
@@ -229,10 +239,10 @@ DataSeries IniConfig::dataSeries(const std::string &key)
 
 void IniConfig::set(const std::string &key, const std::string &value)
 {
-    if (m_map.find(key) != m_map.end())
-        m_map[key]=value;
+    if (p->m_map.find(key) != p->m_map.end())
+        p->m_map[key]=value;
     else
-        m_map.insert(std::make_pair(key,value));
+        p->m_map.insert(std::make_pair(key,value));
 }
 
 void IniConfig::set(const std::string &key, const double &value)
@@ -267,7 +277,7 @@ void IniConfig::set(const std::string &key, const RP::DataSeries &data)
     set(key,stream.str());
 }
 
-void IniConfig::dump(std::stringstream &stream, bool verbose)
+void IniConfig::dump(std::stringstream &stream, bool verbose) const
 {
     RP::StringMap::const_iterator it;
     std::string key;
@@ -283,22 +293,22 @@ void IniConfig::dump(std::stringstream &stream, bool verbose)
         value = "=";
     }
 
-    for (it = m_map.begin();it!=m_map.end();it++)
+    for (it = p->m_map.begin();it!=p->m_map.end();it++)
     {
         stream << key + it->first << value << it->second << std::endl;
     }
 }
 
-const StringMap &IniConfig::mapRef()
+const StringMap &IniConfig::mapRef() const
 {
-    return m_map;
+    return p->m_map;
 }
 
 void IniConfig::read()
 {
     std::ifstream file;
     std::stringstream in;
-    file.open(m_filepath.c_str());
+    file.open(p->m_filepath.c_str());
     if(!file.is_open())
         return;
     in << file.rdbuf();
@@ -310,11 +320,11 @@ void IniConfig::write()
 {
     // in case of wrong encoding etc.
     // this prevents removal of file content
-    if (!m_map.empty())
+    if (!p->m_map.empty())
     {
         std::ofstream file;
         std::stringstream in;
-        file.open(m_filepath.c_str(),std::ios::out);
+        file.open(p->m_filepath.c_str(),std::ios::out);
         if (!file.is_open())
             return;
         dump(in,false);
