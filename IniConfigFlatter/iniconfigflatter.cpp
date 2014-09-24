@@ -3,13 +3,16 @@
 #include <QLabel>
 #include <QMimeData>
 #include <QUrl>
+#include <QLayout>
 
 #include "../IniConfig/iniconfig.h"
 
 IniConfigFlatter::IniConfigFlatter(QWidget *parent)
     : QWidget(parent)
 {
-    QLabel* label = new QLabel("Drop Pre-Ini File(s) here",this);
+    QLabel* label = new QLabel("<p align=center>Drop Pre-Ini File(s) here</p>",this);
+    QGridLayout* layout = new QGridLayout(this);
+    layout->addWidget (label);
     resize(300,300);
     setAcceptDrops(true);
 }
