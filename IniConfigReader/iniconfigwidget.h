@@ -9,7 +9,12 @@
 
 #include "../IniConfig/iniconfig.h"
 
-class IniConfigWidget : public QWidget
+namespace RP
+{
+    class IniConfigWidget;
+}
+
+class RP::IniConfigWidget : public QWidget
 {
     Q_OBJECT
 public:

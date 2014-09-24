@@ -7,6 +7,8 @@
 #include "iniconfigreader.h"
 #include "iniconfigwidget.h"
 
+using namespace RP;
+
 IniConfigReader::IniConfigReader(QWidget *parent)
     : QWidget(parent)
 {

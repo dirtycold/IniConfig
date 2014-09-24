@@ -3,7 +3,12 @@
 
 #include <QWidget>
 
-class IniConfigReader : public QWidget
+namespace RP
+{
+    class IniConfigReader;
+}
+
+class RP::IniConfigReader : public QWidget
 {
     Q_OBJECT
 

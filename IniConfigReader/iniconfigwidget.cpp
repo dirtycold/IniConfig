@@ -1,5 +1,7 @@
 #include "iniconfigwidget.h"
 
+using namespace RP;
+
 IniConfigWidget::IniConfigWidget(const QString &filename, QWidget *parent) :
     QWidget(parent)
 {

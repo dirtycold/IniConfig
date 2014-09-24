@@ -7,7 +7,12 @@
 #include <QDragLeaveEvent>
 #include <QDropEvent>
 
-class IniConfigFlatter : public QWidget
+namespace RP
+{
+    class IniConfigFlatter;
+}
+
+class RP::IniConfigFlatter : public QWidget
 {
     Q_OBJECT
 

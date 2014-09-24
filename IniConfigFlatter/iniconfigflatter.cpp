@@ -7,6 +7,8 @@
 
 #include "../IniConfig/iniconfig.h"
 
+using namespace RP;
+
 IniConfigFlatter::IniConfigFlatter(QWidget *parent)
     : QWidget(parent)
 {
