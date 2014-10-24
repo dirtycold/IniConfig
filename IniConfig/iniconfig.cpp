@@ -1,5 +1,8 @@
 ﻿#include "iniconfig.h"
 #include <fstream>
+#include <stdexcept>
+
+// #define INI_CONFIG_NO_EXCEPTION
 
 namespace RP {
 
@@ -132,6 +135,8 @@ static inline int round(double x)
 
 using namespace RP;
 
+const std::string NonExistKeyString = "key not exist";
+
 class RP::IniConfigPrivate
 {
 public:
@@ -200,9 +205,16 @@ void IniConfig::clear()
 std::string IniConfig::value(const std::string &key) const
 {
     if (p->m_map.find(key) != p->m_map.end())
+    {
         return p->m_map[key];
+    }
     else
+    {
+#ifndef INI_CONFIG_NO_EXCEPTION
+        throw std::invalid_argument(NonExistKeyString + ": " + "'" + key + "'");
+#endif
         return "";
+    }
 }
 
 double IniConfig::doubleValue(const std::string &key) const
