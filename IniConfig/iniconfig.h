@@ -100,6 +100,7 @@ public:
      * @brief 设定配置键值的内容
      * @param key 指定的键值
      * @param value 键值的内容
+     * @warning 若以临时变量形式设定值，请务必使用 std::string 将其初始化，否则在 gcc 下可能被认定为 boolean 类型，导致存储错误的值
      */
     INI void set (const std::string &key, const std::string &value);
 
