@@ -172,7 +172,7 @@ void IniConfig::map(std::stringstream &stream)
         if (!list.empty())
         {
             //get comments removed
-            line = list.at(0);
+            line = list.front();
             //read key and value
             list = RP::split(line,'=');
             if (!list.empty())
