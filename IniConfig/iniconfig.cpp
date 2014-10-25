@@ -267,11 +267,6 @@ void IniConfig::set(const std::string &key, const int &value)
     set (key,RP::toString(value));
 }
 
-void IniConfig::set(const std::string &key, const bool &value)
-{
-	set (key,RP::toString(value==false?0:1));
-}
-
 void IniConfig::set(const std::string &key, const RP::DataSeries &data)
 {
     std::stringstream stream;

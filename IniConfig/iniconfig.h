@@ -119,13 +119,6 @@ public:
      */
     INI void set (const std::string &key, const int &value);
 
-	/**
-     * @brief 设定配置键值的内容
-     * @param key 指定的键值
-     * @param value 键值的内容，bool类型
-     */
-	INI void set (const std::string &key, const bool &value);
-
     /**
      * @brief 设定配置键值的数据序列
      * @param key 指定的键值
