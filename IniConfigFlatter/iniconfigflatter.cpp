@@ -49,7 +49,7 @@ void IniConfigFlatter::dropEvent(QDropEvent *e)
         {
             QString filepath = url.toLocalFile();
             {
-                RP::IniConfig config(filepath.toStdString(),false);
+                RP::IniConfig config(filepath.toStdString(), RP::IniConfig::ReadWrite);
                 Q_UNUSED(config);
             }
         }

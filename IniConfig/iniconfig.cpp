@@ -145,11 +145,15 @@ public:
     RP::StringMap m_map;
 };
 
-IniConfig::IniConfig(const std::string &filepath, bool readonly)
+IniConfig::IniConfig(const std::string &filepath, Access access)
 {
     p = new IniConfigPrivate();
     p->m_filepath = filepath;
-    p->m_readonly = readonly;
+    if (access != ReadWrite)
+        p->m_readonly = true;
+    else
+        p->m_readonly = false;
+
     read();
 }
 

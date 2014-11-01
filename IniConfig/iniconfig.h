@@ -31,12 +31,25 @@ class RP::IniConfig
 {
 
 public:
+	
+	/**
+	 * @brief 访问等级
+	 * @enum ReadOnly 只读访问，最终不保存修改
+	 * @enum ReadWrite 读写访问，最终保存修改，并格式化配置内容（去掉注释、键值排序等）
+	 * 
+	 */
+    enum Access
+    {
+        ReadOnly,
+        ReadWrite
+    };
+
     /**
      * @brief 构造函数
      * @param filepath 指定配置文件的路径和文件名
      * @param readonly 指定是否为只读模式，避免文件写入操作
      */
-    INI IniConfig (const std::string &filepath, bool readonly = false);
+    INI IniConfig (const std::string &filepath, Access access = ReadWrite);
 
     INI ~IniConfig ();
 

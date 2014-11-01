@@ -6,7 +6,7 @@ IniConfigWidget::IniConfigWidget(const QString &filename, QWidget *parent) :
     QWidget(parent)
 {
     layout = new QGridLayout(this);
-    config = new RP::IniConfig(filename.toStdString (),false);
+    config = new RP::IniConfig(filename.toStdString (),RP::IniConfig::ReadWrite);
     read();
 }
 
