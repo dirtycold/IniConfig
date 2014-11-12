@@ -288,15 +288,15 @@ void IniConfig::set(const std::string &key, const RP::DataSeries &data)
     set(key,stream.str());
 }
 
-void IniConfig::dump(std::stringstream &stream, bool verbose) const
+void IniConfig::dump(std::stringstream &stream, Verbose verbose) const
 {
     RP::StringMap::const_iterator it;
     std::string key;
     std::string value;
-    if (verbose)
+    if (verbose == Display)
     {
         key = "key:";
-        value = " value:";
+        value = "\tvalue:";
     }
     else
     {
@@ -338,7 +338,7 @@ void IniConfig::write()
         file.open(p->m_filepath.c_str(),std::ios::out);
         if (!file.is_open())
             return;
-        dump(in,false);
+        dump(in,RP::IniConfig::Storage);
         file << in.rdbuf();
         file.close();
     }

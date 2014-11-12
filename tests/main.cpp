@@ -33,4 +33,10 @@ int main(int argc, char* argv[])
         std::cout << e.what () << std::endl;
     }
 
+    std::cout << std::endl;
+    std::cout << "dumped ini config map." << std::endl << "=============================" << std::endl;
+    std::stringstream s;
+    ini.dump (s, RP::IniConfig::Display);
+    std::cout << s.str ()<< std::endl;
+
 }

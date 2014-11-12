@@ -43,6 +43,12 @@ public:
         ReadOnly,
         ReadWrite
     };
+	
+	enum Verbose
+	{
+		Display,
+		Storage
+	};
 
     /**
      * @brief 构造函数
@@ -145,7 +151,7 @@ public:
      * @param verbose 是否输出为调试格式
      * @note 调试格式仅用来调试，无法用于配置的保存
      */
-    INI void dump(std::stringstream &stream, bool verbose = false) const;
+    INI void dump(std::stringstream &stream, Verbose verbose = Storage) const;
 
     /**
      * @brief 导出现有配置关系表
